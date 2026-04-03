@@ -1,0 +1,22 @@
+# Environment
+.env
+php-api/.env
+
+# Uploads
+php-api/uploads/*
+!php-api/uploads/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dependencies
+vendor/
+node_modules/

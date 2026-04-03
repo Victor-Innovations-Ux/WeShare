@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0A0A0A">
+    <title>WeShare</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-brand">
+                <svg class="logo" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+                    <path d="M16 10L20 15H12L16 10Z" fill="currentColor"/>
+                    <circle cx="16" cy="20" r="3" fill="currentColor"/>
+                </svg>
+                <span>WeShare</span>
+            </div>
+            <button id="createGroupBtn" class="btn btn-primary">
+                Créer un groupe
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Partagez les photos de vos événements</h1>
+                <p class="subtitle">
+                    Créez un groupe, invitez vos amis avec un simple lien, et partagez tous vos souvenirs en un seul endroit.
+                </p>
+                <div class="hero-actions">
+                    <button id="getStartedBtn" class="btn btn-large btn-primary">
+                        Commencer
+                    </button>
+                    <button id="joinGroupBtn" class="btn btn-large btn-secondary">
+                        Rejoindre
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2>Comment ça marche</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <div class="feature-number">1</div>
+                        <h3>Créez un groupe</h3>
+                        <p>Donnez un nom à votre événement et commencez en 10 secondes</p>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-number">2</div>
+                        <h3>Partagez le lien</h3>
+                        <p>Envoyez le code unique à vos amis pour qu'ils rejoignent le groupe</p>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-number">3</div>
+                        <h3>Ajoutez vos photos</h3>
+                        <p>Chacun peut ajouter ses photos et voir qui a partagé quoi</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>WeShare 2024</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Create Group Modal -->
+    <div id="createGroupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Créer un groupe</h2>
+                <button class="modal-close" aria-label="Fermer">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="createGroupForm">
+                    <div class="form-group">
+                        <label for="groupName">Nom de l'événement</label>
+                        <input type="text" id="groupName" name="name" placeholder="Anniversaire de Marie" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="creatorName">Votre nom</label>
+                        <input type="text" id="creatorName" name="creator_name" placeholder="Marie" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Créer le groupe</button>
+                    <p class="login-hint">Vous pourrez vous connecter plus tard pour gérer le groupe</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Group Modal -->
+    <div id="joinGroupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Rejoindre un groupe</h2>
+                <button class="modal-close" aria-label="Fermer">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="joinGroupForm">
+                    <div class="form-group">
+                        <label for="shareCode">Code du groupe</label>
+                        <input type="text" id="shareCode" name="share_code" placeholder="ABC12345" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="participantName">Votre nom</label>
+                        <input type="text" id="participantName" name="name" placeholder="Jean Dupont" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Rejoindre</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Groupe créé</h2>
+                <button class="modal-close" aria-label="Fermer">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-message">
+                    <p>Partagez ce code avec vos amis :</p>
+                    <div class="code-display">
+                        <span id="shareCodeDisplay"></span>
+                        <button id="copyCodeBtn" class="btn btn-small">Copier</button>
+                    </div>
+                    <button id="goToGroupBtn" class="btn btn-primary btn-full">Accéder au groupe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

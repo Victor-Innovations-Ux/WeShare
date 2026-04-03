@@ -1,0 +1,49 @@
+services:
+  app:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=weshare
+      - DB_USER=weshare
+      - DB_PASSWORD=${DB_PASSWORD:-weshare_secret}
+      - DB_PORT=3306
+      - JWT_SECRET=${JWT_SECRET:-change-this-in-production}
+      - JWT_EXPIRY=86400
+      - APP_ENV=production
+      - APP_URL=${APP_URL:-http://localhost}
+      - APP_DEBUG=false
+      - PHOTO_PATH=/var/www/photo
+      - MAX_FILE_SIZE=10485760
+      - ALLOWED_EXTENSIONS=jpg,jpeg,png,gif,webp
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID:-}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET:-}
+      - GOOGLE_REDIRECT_URI=${GOOGLE_REDIRECT_URI:-}
+    volumes:
+      - photo_data:/var/www/photo
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD:-root_secret}
+      - MYSQL_DATABASE=weshare
+      - MYSQL_USER=weshare
+      - MYSQL_PASSWORD=${DB_PASSWORD:-weshare_secret}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./php-api/Migrations/001_create_initial_schema.sql:/docker-entrypoint-initdb.d/001_schema.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  db_data:
+  photo_data:

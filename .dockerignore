@@ -1,0 +1,11 @@
+.git
+.claude
+*.md
+!php-api/Migrations/*.sql
+php-api/vendor
+php-api/.env
+node_modules
+.DS_Store
+TEST_UPLOAD.sh
+create_test_group.php
+server.sh

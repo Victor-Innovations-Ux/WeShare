@@ -1,0 +1,7 @@
+# Ignore all uploaded photos
+groups/*
+
+# Keep the directory structure
+!groups/.gitkeep
+!.gitignore
+!.htaccess

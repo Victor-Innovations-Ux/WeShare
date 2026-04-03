@@ -1,0 +1,33 @@
+# WeShare Photo Storage - Security Configuration
+# Deny all direct web access to photo files
+
+# Disable directory listing
+Options -Indexes
+
+# Deny all access by default
+Order Deny,Allow
+Deny from all
+
+# Disable PHP execution
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps|cgi|pl|exe|sh)$">
+    Deny from all
+</FilesMatch>
+
+# Prevent .htaccess from being viewed
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Disable script execution
+AddHandler cgi-script .php .pl .py .jsp .asp .sh .cgi
+Options -ExecCGI
+
+# Additional security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+</IfModule>
+
+# All file access must go through the API endpoint (/api/photos/download/:id)
+# This ensures authentication and authorization checks are performed
