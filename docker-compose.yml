@@ -27,10 +27,9 @@ services:
         condition: service_healthy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.weshare.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.weshare.rule=Host(`weshare.innovations-ux.com`)"
       - "traefik.http.routers.weshare.entrypoints=web"
       - "traefik.http.services.weshare.loadbalancer.server.port=80"
-      - "traefik.http.routers.weshare.priority=1"
     networks:
       - dokploy-network
       - default
