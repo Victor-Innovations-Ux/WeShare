@@ -1,8 +1,8 @@
 services:
   app:
     build: .
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     environment:
       - DB_HOST=db
       - DB_NAME=weshare
