@@ -25,6 +25,15 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.weshare.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.weshare.entrypoints=web"
+      - "traefik.http.services.weshare.loadbalancer.server.port=80"
+      - "traefik.http.routers.weshare.priority=1"
+    networks:
+      - dokploy-network
+      - default
     restart: unless-stopped
 
   db:
@@ -43,6 +52,10 @@ services:
       timeout: 5s
       retries: 10
     restart: unless-stopped
+
+networks:
+  dokploy-network:
+    external: true
 
 volumes:
   db_data:
